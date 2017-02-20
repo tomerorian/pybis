@@ -1,0 +1,201 @@
+{
+	"variables": [],
+	"info": {
+		"name": "10bis",
+		"_postman_id": "bb19eedd-0a2c-6512-1c64-ca06c0414ea5",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"url": "https://www.10bis.co.il/api/Login?UserName={{username}}&password={{password}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "add-dish",
+			"request": {
+				"url": "http://www.10bis.co.il/api/AddDish",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"dishToSubmit\": {\n\t\t\"AssignedUserId\": -1,\n\t\t\"Choises\": [],\n\t\t\"DishNotes\": \"\",\n\t\t\"DishOwnerId\": 82425,\n\t\t\"ID\": 1137890,\n\t\t\"orderIndex\": 0,\n\t\t\"Quantity\": 1\n\t},\n\t\"encryptedUserId\": \"{{euid}}\",\n\t\"resId\": 8479,\n\t\"shoppingCartGuid\": \"{{cartuid}}\",\n\t\"Domainid\": \"10bis\",\n\t\"Websiteid\": \"10bis\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "remove-dish",
+			"request": {
+				"url": "http://www.10bis.co.il/api/removedish",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"encryptedUserId\": \"{{euid}}\",\n\t\"shoppingCartGuid\": \"{{cartuid}}\",\n\t\"Domainid\": \"10bis\",\n\t\"Websiteid\": \"10bis\",\n\t\"DishIndex\": 0\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "set-address-in-cart",
+			"request": {
+				"url": "https://www.10bis.co.il/api/SetAddressInShoppingCart",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"ShoppingCartGuid\": \"{{cartuid}}\",\n\t\"encryptedUserId\": \"{{euid}}\",\n\t\"addressId\": 0\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "submit-order",
+			"request": {
+				"url": "https://www.10bis.co.il/api/SubmitOrder",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"dontwantcultery\": 0,\n\t\"remarks\": \"\",\n\t\"resId\": 8479,\n\t\"shoppingCartGuid\": \"{{cartuid}}\",\n\t\"encryptedUserId\": \"{{euid}}\",\n\t\"payments\": [\n\t\t{\n\t      \"PaymentMethod\": 1,\n\t      \"CreditCardType\": 0,\n\t      \"CardId\": \"882745\",\n\t      \"UserId\": 1563080,\n\t      \"UserName\": \"Tomer Orian\",\n\t      \"CardLastDigits\": \"5143\",\n\t      \"Sum\": 8,\n\t      \"Assigned\": true,\n\t      \"Remarks\": null,\n\t      \"PaymentMethodDescription\": \"כרטיס תן ביס 5143\",\n\t      \"ExpirationDate\": null\n\t    },\n\t    {\n\t      \"PaymentMethod\": 2,\n\t      \"CreditCardType\": 4,\n\t      \"CardId\": \"617361\",\n\t      \"UserId\": 1563080,\n\t      \"UserName\": \"תומר אוריאן\",\n\t      \"CardLastDigits\": \"3573\",\n\t      \"Sum\": 0,\n\t      \"Assigned\": false,\n\t      \"Remarks\": null,\n\t      \"PaymentMethodDescription\": \"ישראכרט 3573\",\n\t      \"ExpirationDate\": \"05/2018\"\n\t    }\n\t]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-dish",
+			"request": {
+				"url": "https://www.10bis.co.il/api/GetDish/?dishId=552716&categoryID=82427&encryptedUserId={{euid}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-shopping-cart",
+			"request": {
+				"url": "https://www.10bis.co.il/api/OrderConfirmation?encryptedUserId={{euid}}&shoppingCartGuid={{cartuid}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-shopping-cart-total",
+			"request": {
+				"url": "https://www.10bis.co.il/api/ShoppingCartTotal/?encryptedUserId={{euid}}&shoppingCartGuid={{cartuid}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-payment-method",
+			"request": {
+				"url": "https://www.10bis.co.il/api/GetPaymentList/?shoppingCartGuid={{cartuid}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-rest-info",
+			"request": {
+				"url": "https://www.10bis.co.il/api/GetRestaurantAbout/?resId=8479",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-rest-info-detailed",
+			"request": {
+				"url": "https://www.10bis.co.il/api/GetRestaurantById/?resId=8479&encryptedUserId={{euid}}&shoppingCartGuid={{cartuid}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-menu",
+			"request": {
+				"url": "https://www.10bis.co.il/api/GetMenu/?ResId=8479&deliveryMethod=PIckup&encryptedUserId={{euid}}&shoppingCartGuid={{cartuid}}",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "order-history",
+			"request": {
+				"url": "https://www.10bis.co.il/api/GetUserOrderHistory/?encryptedUserId={{euid}}&pageNum=0&pageSize=10",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-user-addresses",
+			"request": {
+				"url": "https://www.10bis.co.il/api/GetAddressList?encryptedUserId={{euid}}&resId=8479",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
