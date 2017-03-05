@@ -20,6 +20,7 @@ def order_dish(rest, category, dish):
         print "Failed to get payments :("
         exit()
 
+    print "not submitting, remove this line to make this work"
     exit()
 
     submit = SubmitOrderRequest(rest, payments.payments)
