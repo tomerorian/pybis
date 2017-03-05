@@ -1,25 +1,39 @@
 #!/usr/bin/python
 
+import argparse
 from reqs import *
 
-login = LoginRequest()
-login.make()
+def order_dish(rest, category, dish):
+    login = LoginRequest()
+    login.make()
 
-menu = MenuRequest(8479, DeliveryMethod.PICKUP)
-menu.make()
+    menu = MenuRequest(rest, DeliveryMethod.PICKUP)
+    menu.make()
 
-addDish = AddDishRequest(8479, 82430, 552761)
-addDish.make()
+    addDish = AddDishRequest(rest, category, dish)
+    addDish.make()
 
-payments = GetPaymentRequest()
-payments.make()
+    payments = GetPaymentRequest()
+    payments.make()
 
-if payments.payments is None:
-    print "Failed to get payments :("
+    if payments.payments is None:
+        print "Failed to get payments :("
+        exit()
+
     exit()
 
-exit()
+    submit = SubmitOrderRequest(rest, payments.payments)
+    submit.make()
+    submit.pprint_result()
 
-submit = SubmitOrderRequest(8479, payments.payments)
-submit.make()
-submit.pprint_result()
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Order food with 10bis')
+
+    parser.add_argument('--rest', dest='rest', help="Restaurant")
+    parser.add_argument('--cat', dest='category', help="Category")
+    parser.add_argument('--dish', dest='dish', help="Dish")
+
+    args = parser.parse_args()
+    
+    if args.rest is not None and args.category is not None and args.dish is not None:
+        order_dish(args.rest, args.category, args.dish)
