@@ -13,6 +13,9 @@ def order_dish(rest, category, dish):
     addDish = AddDishRequest(rest, category, dish)
     addDish.make()
 
+    confirmOrder = ConfirmOrderRequest()
+    confirmOrder.make()
+
     payments = GetPaymentRequest()
     payments.make()
 
