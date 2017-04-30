@@ -3,9 +3,9 @@
 import argparse
 from reqs import *
 
-def order_dish(rest, category, dish):
+def order_dish(username, password, rest, category, dish):
     # Logs in, gets and sets our user id and shopping cart id in the config
-    login = LoginRequest()
+    login = LoginRequest(username, password)
     login.make()
 
     # Making the menu request sets the delivery method
@@ -39,6 +39,8 @@ def order_dish(rest, category, dish):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Order food with 10bis')
 
+    parser.add_argument('-u', dest='username', help="Username")
+    parser.add_argument('-p', dest='password', help="Password")
     parser.add_argument('--rest', dest='rest', help="Restaurant")
     parser.add_argument('--cat', dest='category', help="Category")
     parser.add_argument('--dish', dest='dish', help="Dish")
@@ -46,4 +48,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     if args.rest is not None and args.category is not None and args.dish is not None:
-        order_dish(args.rest, args.category, args.dish)
+        order_dish(args.username, args.password, args.rest, args.category, args.dish)

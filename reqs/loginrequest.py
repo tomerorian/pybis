@@ -5,8 +5,12 @@ import config
 
 class LoginRequest(BasicRequest):
 
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
     def make(self):
-        self.get("Login", {"UserName": None, "password": None})
+        self.get("Login", {"UserName": self.username, "password": self.password})
 
     def _on_success(self):
         config.encrypteduserid = self.result["UserData"]["EncryptedUserId"]
