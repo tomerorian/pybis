@@ -4,18 +4,23 @@ import argparse
 from reqs import *
 
 def order_dish(rest, category, dish):
+    # Logs in, gets and sets our user id and shopping cart id in the config
     login = LoginRequest()
     login.make()
 
+    # Making the menu request sets the delivery method
     menu = MenuRequest(rest, DeliveryMethod.PICKUP)
     menu.make()
 
+    # Adds the wanted dish to the shopping cart
     addDish = AddDishRequest(rest, category, dish)
     addDish.make()
 
+    # Confirming the order is not a must, but it applies hourly coupons if present
     confirmOrder = ConfirmOrderRequest()
     confirmOrder.make()
 
+    # Gets the payment split to make (needed for submitting the order)
     payments = GetPaymentRequest()
     payments.make()
 
@@ -26,6 +31,7 @@ def order_dish(rest, category, dish):
     print "not submitting, remove this line to make this work"
     exit()
 
+    # The final call that actually makes the order
     submit = SubmitOrderRequest(rest, payments.payments)
     submit.make()
     submit.pprint_result()
