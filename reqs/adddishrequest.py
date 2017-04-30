@@ -3,6 +3,9 @@
 from basicrequest import BasicRequest
 import config
 
+import logging
+logger = logging.getLogger("pybis")
+
 class AddDishRequest(BasicRequest):
 
     def __init__(self, rest_id, category_id, dish_id):
@@ -14,7 +17,7 @@ class AddDishRequest(BasicRequest):
         self.post("AddDish", self._get_body())
 
     def _on_success(self):
-        print "Dish added successfully"
+        logger.info("Dish added successfully")
 
     def _get_body(self):
         return {

@@ -3,6 +3,9 @@
 from basicrequest import BasicRequest
 import config
 
+import logging
+logger = logging.getLogger("pybis")
+
 class SubmitOrderRequest(BasicRequest):
 
     def __init__(self, rest_id, payments):
@@ -13,7 +16,7 @@ class SubmitOrderRequest(BasicRequest):
         self.post("SubmitOrder", self._get_body())
 
     def _on_success(self):
-        print "Order is out!"
+        logger.info("Order is out!")
 
     def _get_body(self):
         return {

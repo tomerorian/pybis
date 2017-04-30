@@ -3,6 +3,9 @@
 from basicrequest import BasicRequest
 import config
 
+import logging
+logger = logging.getLogger("pybis")
+
 class ConfirmOrderRequest(BasicRequest):
 
     def __init__(self):
@@ -12,7 +15,7 @@ class ConfirmOrderRequest(BasicRequest):
         self.get("OrderConfirmation", self._get_body())
 
     def _on_success(self):
-        print "Order confirmed"
+        logger.info("Order confirmed")
 
     def _get_body(self):
         return {

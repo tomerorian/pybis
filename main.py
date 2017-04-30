@@ -3,6 +3,13 @@
 import argparse
 from reqs import *
 
+import logging
+logger = logging.getLogger("pybis")
+
+class PrintLogger:
+    def write(self, s):
+        print s,
+
 def order_dish(username, password, rest, category, dish):
     # Logs in, gets and sets our user id and shopping cart id in the config
     login = LoginRequest(username, password)
@@ -25,10 +32,10 @@ def order_dish(username, password, rest, category, dish):
     payments.make()
 
     if payments.payments is None:
-        print "Failed to get payments :("
+        logger.error("Failed to get payments :(")
         exit()
 
-    print "not submitting, remove this line to make this work"
+    logger.warning("not submitting, remove this line to make this work")
     exit()
 
     # The final call that actually makes the order
@@ -37,6 +44,10 @@ def order_dish(username, password, rest, category, dish):
     submit.pprint_result()
 
 if __name__ == "__main__":
+    logger = logging.getLogger("pybis")
+    logger.setLevel(logging.INFO)
+    logger.addHandler(logging.StreamHandler(PrintLogger()))
+
     parser = argparse.ArgumentParser(description='Order food with 10bis')
 
     parser.add_argument('-u', dest='username', help="Username")
