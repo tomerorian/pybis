@@ -33,10 +33,10 @@ def order_dish(username, password, rest, category, dish):
 
     if payments.payments is None:
         logger.error("Failed to get payments :(")
-        exit()
+        return
 
     logger.warning("not submitting, remove this line to make this work")
-    exit()
+    return
 
     # The final call that actually makes the order
     submit = SubmitOrderRequest(rest, payments.payments)
