@@ -10,7 +10,7 @@ class PrintLogger:
     def write(self, s):
         print s,
 
-def order_dish(username, password, rest, category, dish):
+def order_dish(username, password, rest, category, dish, dryrun=True):
     # Logs in, gets and sets our user id and shopping cart id in the config
     login = LoginRequest(username, password)
     login.make()
@@ -35,8 +35,9 @@ def order_dish(username, password, rest, category, dish):
         logger.error("Failed to get payments :(")
         return
 
-    logger.warning("not submitting, remove this line to make this work")
-    return
+    if (dryrun):
+    	logger.warning("not submitting, run with --prod to actually order")
+    	return
 
     # The final call that actually makes the order
     submit = SubmitOrderRequest(rest, payments.payments)
@@ -55,8 +56,9 @@ if __name__ == "__main__":
     parser.add_argument('--rest', dest='rest', help="Restaurant")
     parser.add_argument('--cat', dest='category', help="Category")
     parser.add_argument('--dish', dest='dish', help="Dish")
+    parser.add_argument('--prod', action='store_true')
 
     args = parser.parse_args()
     
     if args.rest is not None and args.category is not None and args.dish is not None:
-        order_dish(args.username, args.password, args.rest, args.category, args.dish)
+        order_dish(args.username, args.password, args.rest, args.category, args.dish, not args.prod)
